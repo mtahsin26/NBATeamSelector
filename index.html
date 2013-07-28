@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>NBA All Star Lineup</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+
+<script src="data.js" type="text/javascript"></script>
+<script type="text/javascript" src="cookies.js"></script>
+
+<script>
+var IElt8=false; //boolean to see if less than IE 8
+var oldBrowser = false; // boolean to see if older than IE 7, 
+</script>
+<!-- below ONLY in html-->
+<!--[if lt IE 8]>
+<script>
+var IElt8=true;
+</script>
+<![endif]-->
+
+<!-- below ONLY in html-->
+<!--[if lt IE 7]>
+<script>
+var oldBrowser=true;
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+//<![CDATA[
+	
+	//alert(oldBrowser);
+	var begin = false; //check if script has started and everything is initialized, then turns true.
+	var depth = 1; //initial depth of select menus is 1.
+	var currentDepth; //set the variable for the currentDepth of select menus
+
+	//If we have an old browser, redirect it! 
+	if(oldBrowser){
+		window.location = "redirect.html";
+	}
+
+	//Use getDepth for scalability so that we can add more
+	//select menus, rather than hard coding a maximum depth value
+	// This iterates our data set and finds the biggest depth value
+	function getDepth(){
+
+		for(x in dataArray){ //Iterate through our dataArray and get the depth value
+			
+			if(dataArray[x][0] > depth){
+				depth = dataArray[x][0];
+				
+			}
+		}
+	}
+
+	//This function creates the player info that we selected from our select menu
+	//and then slides it onto the screen, with player attributes and all
+	//It takes in the player name as the parameter
+	function showPlayerInfo(value){
+
+		//create new div 
+		var newDiv = document.createElement('div');
+		
+		//assign some style to the elements we are creating
+		var divStyle = 'background-color: black; text-align: center; font-size: 20pt; font-weight: bold; color:white; min-height: 200px; margin: auto; margin: 10px 0 30px 0; padding: 10px; position: relative; left:700px;';
+		var LiStyle = 'font-size: 12pt; list-style-type: none; margin: 10px;'
+		
+		//Create an image that displays the players images. The images are in the players folder
+		//and signified by "Player Name.jpg"
+		var newImage = document.createElement('img');
+		newImage.setAttribute('src', 'players/'+value+'.jpg');
+
+		//Create a listt to display the player attributes
+		var newUl = document.createElement('ul');
+		var teamLi = document.createElement('li');
+		teamLi.appendChild(document.createTextNode("Team: "+playerData[value].Team)); //Get the team value from our playerData array which is indexed by the player name and then the attribute
+
+		var positionLi = document.createElement('li');
+		positionLi.appendChild(document.createTextNode("Position: "+playerData[value].Position)); //Gets position value
+
+		var numberLi = document.createElement('li');
+		numberLi.appendChild(document.createTextNode("Number: "+playerData[value].pNumber)); //Gets player number
+
+		var heightLi = document.createElement('li');
+		heightLi.appendChild(document.createTextNode("Height: "+playerData[value].Height)); //Gets player height
+		
+		//If IE7, then assign the styles, otherwise do it the regular way
+		if(IElt8){
+			teamLi.style.setAttribute('cssText', LiStyle);
+			positionLi.style.setAttribute('cssText', LiStyle);
+			numberLi.style.setAttribute('cssText', LiStyle);
+			heightLi.style.setAttribute('cssText', LiStyle);
+		}else{
+			teamLi.setAttribute('style', LiStyle);
+			positionLi.setAttribute('style', LiStyle);
+			numberLi.setAttribute('style', LiStyle);
+			heightLi.setAttribute('style', LiStyle);
+		}
+		//Append each element to the ul
+		newUl.appendChild(teamLi);
+		newUl.appendChild(positionLi);
+		newUl.appendChild(numberLi);
+		newUl.appendChild(heightLi);	
+
+		
+
+		//Set DIV style with IE7 fix
+		if(IElt8){
+			newDiv.style.setAttribute('cssText', divStyle);
+		}else{
+			newDiv.setAttribute('style', divStyle);
+		}
+		
+		newDiv.appendChild(document.createTextNode(value)); // Append the player name
+		newDiv.appendChild(document.createElement('br')); //Add a line break
+		newDiv.appendChild(newImage); //Append the players image
+		newDiv.appendChild(newUl); //Append the attributes
+		
+		//Get the info Div element and append the player information div we just created
+		var infoDiv = document.getElementById('info');
+		infoDiv.appendChild(newDiv);
+		slideAnimation();
+	}
+
+	//Now if there is a player already selected and already in our player 'info' div, and we need to remove it, we call this function
+	function removePlayerInfo(val){
+		//Gets the div of the player info element
+		var divList = document.getElementById('info').getElementsByTagName('div');
+		var playerInfo = document.getElementById('info').childNodes.length;
+
+		//If there is an element, then remove it
+		if(!playerInfo == 0){
+			document.getElementById('info').removeChild(divList[0]);
+		}
+		
+	}
+
+	//Removes the player info div by animating it. We call this when we have a player info div, but in our select menu we switch players. 
+	function removePlayerAnimation(){
+		var infoDiv = document.getElementById('info').childNodes[0];
+
+		if(parseInt(infoDiv.style.left) < 700){
+			infoDiv.style.left = parseInt(infoDiv.style.left)+20+'px';
+			setTimeout('removePlayerAnimation()', 5);
+		}else{
+			var divList = document.getElementById('info').getElementsByTagName('div');
+			document.getElementById('info').removeChild(divList[0]);
+
+			//Get the value of the new player that was selected
+			var playerName = document.getElementById('main').lastChild.getElementsByTagName('select')[0];
+			showPlayerInfo(playerName.value); //Show the new player
+		}
+	}
+
+	//Gets the current depth of the select menus in our 'main' div.
+	function getCurrentDepth(){
+		var D = document.getElementById('main').getElementsByTagName('div');
+		currentDepth = D.length -1; //Subtract by one to match our index scheme in our dataArray
+		
+		
+	}
+
+	//Remove the lastchild select menus except the one we changed.
+	function removeSelect(IDval, which){
+
+		var divContainer = document.getElementById('main');
+
+		while(which != divContainer.lastChild){
+			
+			divContainer.removeChild(divContainer.lastChild);
+		}
+	}
+
+	//calls this function to check whether to add next select menu
+	//or reset if a previous select menu is chosen
+	function changeSelect(which){
+		
+		//If no parameter is given that means we are creating the first select menu
+		if(!which){
+
+			//calls changeSelect() for body onload. 
+			//So if 'which' does not exist, that means that this is first select menu we are creating;
+			createSelect('Start');
+			currentDepth = 0; //Set the current depth to 0
+
+			//load any previous lineup we saved in cookies when we first visit the page
+			//Does this on body onload when begin = false. Only need to do this once when the page loads,
+			//afterwards we set the begin varibale to false;
+			if(!begin){
+				getData();
+				loadLineupCookies();
+				
+			}
+			begin = true; //The page has loaded the above elements
+			//We do not need to call certain functions when we reset our selections that
+			//is why we have a begin boolean operator
+
+			////////////////////////////////////////////////////////////
+		}else{
+			//Otherwise if we are given a parameter which is the div holding the select menu we just changed, do the following
+		
+			var idValue = which.parentNode.id; // The id value of the selection
+			var val = which.value; //The actual selection value which is used to access the dataArray
+
+			//console.log(which.parentNode.id+" IDVAL");
+			//console.log(currentDepth+" CURRENT DEPTH VAL");
+
+			//if changing a previous selection that was already selected before, which means the idValue is less than our current depth of select menus
+			if(idValue < currentDepth){
+
+				//Remove all other select menus that come after this.
+				removeSelect(idValue, which.parentNode);
+
+				//If the value is NOT #(default selection question)
+				//just create the next selection based on our change
+				//and add the choice div in our player information
+				if(val != "#"){
+					createSelect(val);	
+				}
+				//Update the Current selection depth
+				getCurrentDepth();
+				removePlayerInfo(val); //Remove the player in our info div
+			}
+
+			//if the currentDepth is not at its max
+			else if(currentDepth < depth){ 
+				//if the value is not # which is the question option in the select menu
+				if(val != "#"){
+					createSelect(val); //create the next select menu
+				}
+				
+				getCurrentDepth();
+				removePlayerInfo(val);
+			}
+			//Now if we are at the last selection
+			else if(currentDepth == depth){
+				//GoToScroll('wrapper');  <---Optional code to enable automatic scrolling
+
+				//Get the div in our info div
+				var divList = document.getElementById('info').getElementsByTagName('div');
+
+				//If the value isn't the question (the first choice indicated by the #)
+				if(val != '#'){
+
+					//If the info div has no elements
+					if(divList.length == 0){
+						removePlayerInfo(val);
+						showPlayerInfo(val); //Show the player info
+					}else{
+
+						//Otherwise if there is a player, remove it using the animation slide
+						removePlayerAnimation();
+					}
+					
+				}else{
+					removePlayerInfo(val); //otherwise just regularly remove the current player in the info div
+				}
+			}
+		}
+	}
+
+	//Creates the new select menu
+	function createSelect(val){
+		//////////////////IF not started/////////////
+			
+			var newDiv = document.createElement('div');
+			
+			//IE7 set class FIX
+			if(IElt8){
+				newDiv.className = 'menu';
+			}else{
+				newDiv.setAttribute('class', 'menu');
+			}
+
+			//Sets the id for the div using the value in the dataArray
+			newDiv.setAttribute('id', dataArray[val][0]);
+
+			//Create the select menu
+			var newSelect = document.createElement('select');
+
+			//Add the changeSelect function, do it using an anonymous function for IE7
+			if(IElt8){
+				newSelect.setAttribute('onchange',function(){changeSelect(this);});
+			}else{
+				newSelect.setAttribute('onchange', 'changeSelect(this)');
+			}
+			
+			
+			//Now for the choices in the data array with the value passed in, create the options
+			//The first element always gets # as the id though since it is the question
+			for(i = 1, l=dataArray[val].length; i<l; i++){
+				var newOption = document.createElement('option');
+				if(i == 1){
+					newOption.setAttribute('value', "#");
+				}
+				else{
+					newOption.setAttribute('value', dataArray[val][i]);		
+				}
+
+				var text = document.createTextNode(dataArray[val][i]);
+				newOption.appendChild(text);
+				newSelect.appendChild(newOption);
+				
+			}
+
+			//Append the select menu to the div and then append the div to the slect menu area
+			newDiv.appendChild(newSelect);
+			document.getElementById('main').appendChild(newDiv);
+
+			//Optional code to scroll to the select menu after a slection is picked
+			/*if(begin){
+				GoToScroll('wrapper');
+			}*/
+		}
+
+
+	/*function init(){
+		var newDiv = document.createElement('div');
+		
+		//IE7 set class FIX
+		if(IElt8){
+			newDiv.className = 'menu';
+		}else{
+			newDiv.setAttribute('class', 'menu');
+		}
+
+		newDiv.setAttribute('id', startArray[0]);
+		var newSelect = document.createElement('select');
+
+		if(IElt8){
+			
+			//newSelect.setAttribute('onchange',changeSelect(this));
+			newSelect.onchange = function(){changeSelect(this);};
+			
+		}else{
+			newSelect.setAttribute('onchange', 'changeSelect(this)');
+		}
+
+
+
+		for(i=1, l=startArray.length; i<l; i++){
+			var newOption = document.createElement('option');
+			if(i == 1){
+				newOption.setAttribute('value', "#");
+			}
+			else{
+				newOption.setAttribute('value', startArray[i]);
+			}
+			var text = document.createTextNode(startArray[i]);
+			newOption.appendChild(text);
+			newSelect.appendChild(newOption);
+			
+		}
+		newDiv.appendChild(newSelect);
+		document.getElementById('main').appendChild(newDiv);
+		currentDepth = 0;
+
+		//loadLineupCookies();
+
+
+	}*/
+
+	//Saves your current lineup by adding your player names to a string delimited by a ','
+	function saveLineupCookies(){
+		cookieString = "";
+		var yourName = document.getElementById('yourName'); //Saves your coach and team name in cookies as well
+		var teamName = document.getElementById('teamName');
+
+		//If the lineup is not empty
+		if(playersArray.length != 0){
+
+			//Get all the player names
+			for(i=0; i< playersArray.length; i++){
+				if(i == playersArray.length -1){
+					cookieString += playersArray[i]; //if last player in our list, we do not need the comma delimter
+				}else{
+					cookieString += playersArray[i]+",";	
+				}
+				
+			}
+			
+			//Now if your coahc name and team name values you entered are not empty, save them in cookies
+			if(yourName.value != "" && teamName.value != ""){
+				SetCookie('my_lineup', cookieString);
+				SetCookie('your_name', yourName.value);
+				SetCookie('team_name', teamName.value);
+				alert("Lineup saved");
+				
+
+				var lineupInfo = document.getElementById('lineup').getElementsByTagName('h2')[0];
+					
+				//Update the string
+				lineupInfo.childNodes[0].nodeValue = coachString(yourName.value, teamName.value);
+				//return true;
+
+			}else{
+				alert("Coach! You need a name/team name!");
+				//return false;
+
+			}
+
+		}
+		else{
+			alert("Cannot save empty lineup");
+			//return false;
+			
+		}
+		return false;//Return false for onsubmit
+	}
+
+	//Load the cookies 
+	function loadLineupCookies(){
+		if(GetCookie('my_lineup') != null || GetCookie('your_name') != null || GetCookie('team_name') != null){
+			deleteLineup();
+			
+			//The cookie string holds the player names of your lineup separted by a comma
+			cookieString = GetCookie('my_lineup');
+			playersArray = cookieString.split(","); //Split it into an array and set it to the playersArray
+
+				//If the string is not null
+				if(GetCookie('my_lineup') !=""){
+
+					loadLineup(); //Update the lineup string
+					for(i=0; i< playersArray.length; i++){
+						LineupPlayerData(playersArray[i]); //For each player add the information about the player in your lineup
+					}
+
+					//Load your coach and team name for your saved lineup
+					var yourName = document.getElementById('yourName');
+					var teamName = document.getElementById('teamName');
+
+
+					
+					yourName.value = GetCookie('your_name');
+					teamName.value = GetCookie('team_name');
+					
+
+					var lineupInfo = document.getElementById('lineup').getElementsByTagName('h2')[0];
+					
+					//Update the Coach name and team name String
+					lineupInfo.childNodes[0].nodeValue = coachString(yourName.value, teamName.value);
+
+					//Change the submit button to Update
+					document.getElementById('submitSave').childNodes[0].nodeValue = "Update Lineup: ";
+					document.getElementById('submitSave').getElementsByTagName('input')[0].value = "Update Lineup";
+				}
+		}else if(begin){
+			alert("No saved lineup exists");
+		}
+	}
+
+	//Resets your entrie selection and restarts the select menus
+	function reset(){
+		var mainDiv = document.getElementById('main');
+		while(mainDiv.hasChildNodes()){
+			mainDiv.removeChild(mainDiv.lastChild);
+		}
+		changeSelect();//Call to create the select menu
+		removePlayerInfo();
+	}
+
+	//Updates how many players you have in your lineup
+	function loadLineup(){
+		var lineupInfo = document.getElementById('lineup').getElementsByTagName('h1')[0];
+		
+		lineupInfo.childNodes[0].nodeValue = "You have " + playersArray.length + "/5 player(s) in your lineup.";
+	}
+
+	//Delete a selected player from the lineup 
+	function deleteFromLineup(player, which){
+		which.parentNode.removeChild(which); //Remove the player from the screen
+
+		//Now update our playerArray which still holds that players name in the array(memory)
+		try{
+				var playerIndex = playersArray.indexOf(player);
+		}catch(err){
+			console.log("IE CANT DO THIS");
+				
+			var found = -1;
+
+			for (var i = 0; i < playersArray.length; i++) {
+			  if (playersArray[i] == player) {
+			    found = i;
+			    break;
+				}
+			}
+			var playerIndex = found;
+		}
+		playersArray.splice(playerIndex, 1); //Remove that player from the array
+		loadLineup(); //Update the lineup string
+	}
+
+	//Creates the graphical information of the player when we add them to our up
+	//Takes in the player name as the parameter
+	function LineupPlayerData(playerName){
+
+		var newDiv = document.createElement('div');
+		var newLabel = document.createElement('p');
+		divStyle = ' font-size: 20pt; font-weight: bold; color:white; margin-top: 10px; padding: 30px; position: relative; left:0px;';
+
+		
+		newLabel.appendChild(document.createTextNode(playerName));
+		newDiv.appendChild(newLabel);
+
+
+		var newImage = document.createElement('img');
+		newImage.setAttribute('src','players/'+ playerName+'.jpg');
+
+
+		var deletePlayer = document.createElement('h5');
+		deletePlayer.appendChild(document.createTextNode('Remove from Lineup'));
+
+
+		//Create the div to display the player attributes, and acces the attributes using the playerData array and our player Name
+		var playerStatsDiv = document.createElement('div');
+
+		playerStatsDiv.appendChild(document.createElement('p').appendChild(document.createTextNode('Team: '+playerData[playerName].Team)));
+		playerStatsDiv.appendChild(document.createElement('br'));
+
+		playerStatsDiv.appendChild(document.createElement('p').appendChild(document.createTextNode('Position: '+playerData[playerName].Position)));
+		playerStatsDiv.appendChild(document.createElement('br'));
+
+		playerStatsDiv.appendChild(document.createElement('p').appendChild(document.createTextNode('Number: '+playerData[playerName].pNumber)));
+		playerStatsDiv.appendChild(document.createElement('br'));
+
+		playerStatsDiv.appendChild(document.createElement('p').appendChild(document.createTextNode('Height: '+playerData[playerName].Height)));
+		
+		
+		newDiv.appendChild(newImage);
+		newDiv.appendChild(playerStatsDiv);
+		newDiv.appendChild(deletePlayer);
+		
+
+		//IE7 set class name, and functions of the items we just created
+		if(IElt8){
+			newDiv.className = 'LineupPlayerInfo';
+			newDiv.style.setAttribute('cssText', divStyle);
+
+			playerStatsDiv.className = 'dynamicInfo';
+
+			deletePlayer.setAttribute('onclick', function(){deleteFromLineup(playerName, this.parentNode);});
+		}else{
+			newDiv.setAttribute('class', 'LineupPlayerInfo');
+			newDiv.setAttribute('style', divStyle);
+
+			playerStatsDiv.setAttribute('class', 'dynamicInfo');
+			deletePlayer.setAttribute('onclick', 'deleteFromLineup("'+playerName+'",this.parentNode)');
+		}
+
+
+		var LineupDiv = document.getElementById('playerLineup');
+
+		//If there are players already in the lineup, add them before the first one, other wise just add them
+		if(LineupDiv.childNodes[0]){
+			LineupDiv.insertBefore(newDiv, LineupDiv.childNodes[0]);
+		}else{
+			LineupDiv.appendChild(newDiv);
+		}
+		
+		
+	}
+
+	//Add the selected player in our info div to the lineup
+	function addToLineup(){
+		var getPlayerDiv = document.getElementById('info');
+
+		//Check to see if there actually is a player selected
+		if(getPlayerDiv.childNodes.length == 0){
+			alert("No player selected");	
+		}else if(playersArray.length != 5){ //Check to see if we have less than 5. That is the max
+			myPlayer = getPlayerDiv.getElementsByTagName('div')[0].childNodes[0].nodeValue; //Get the player name
+			
+			//Get the index of the player in our player array
+			try{
+				var playerIndex = playersArray.indexOf(myPlayer); 
+			}catch(err){
+				//console.log("IE CANT DO THIS");
+				
+				var found = -1;
+
+				for (var i = 0; i < playersArray.length; i++) {
+				  if (playersArray[i] == myPlayer) {
+				    found = i;
+				    break;
+				  }
+				}
+				var playerIndex = found;
+			}
+
+			
+			//Check to see if the player is already in our lineup by passing in the index we found
+			if(playersArray[playerIndex]){
+				alert(myPlayer + " is already in your lineup");
+			}else{
+				
+				//Other wise add the player to our lineup
+				playersArray.push(myPlayer);
+				loadLineup();
+				GoToScroll('lineup');
+				LineupPlayerData(myPlayer); //Add in the graphics of the player
+
+
+			}			
+			
+		}else{
+			alert("You have 5 players on your team");
+		}
+	}
+
+	//Recursive animation to scroll down
+	function scrollAnimationDown(pos, finish){
+		
+		if(pos < finish){
+			window.scrollTo(0, pos + 20);
+			pos += 20;
+			setTimeout('scrollAnimationDown('+ pos+', '+ finish+')', 5);
+		}else{
+			window.scrollTo(0, finish);
+		}
+	}
+
+	//Recursive function to scroll up
+	function scrollAnimationUp(pos, finish){
+		
+		if(pos > finish){
+			
+			window.scrollTo(0, pos - 20);
+			pos -= 20;
+			setTimeout('scrollAnimationUp('+ pos+', '+ finish+')', 5);
+		}else{
+			window.scrollTo(0, finish);
+		}
+	}
+
+	//Slide animation to bring the player into the page when you select a player
+	function slideAnimation(){
+		var infoDiv = document.getElementById('info').childNodes[0];
+		
+		if(parseInt(infoDiv.style.left) > 0){
+			infoDiv.style.left = parseInt(infoDiv.style.left)-20+'px';
+			setTimeout('slideAnimation()', 5);
+		}
+	}
+
+	//Give an element and scrolls to that elements as an animation
+	function GoToScroll(where){
+		var whereTo = document.getElementById(where).offsetTop;
+		
+
+		//Check if IE
+		if(document.attachEvent){
+			var position = document.documentElement.scrollTop;
+		}else{
+			var position = window.pageYOffset;
+		}
+
+		//Calls up or down function based on where you are on the page
+		if(position < whereTo){
+				scrollAnimationDown(position, whereTo);
+		}
+		else if(position > whereTo){
+			scrollAnimationUp(position, whereTo);
+		}
+	}
+
+	//Delete your entire lineup and resets your playerArray which are the players in your lineup
+	//Also removes all the player divs from the lineup
+	function deleteLineup(){
+		playersArray = [];
+
+		currentPlayersDiv = document.getElementById('playerLineup');
+		while(currentPlayersDiv.lastChild){
+			currentPlayersDiv.removeChild(currentPlayersDiv.lastChild);
+		}
+		loadLineup(); //Call this to get the number of players in your lineup and update it
+
+	}
+
+	//Changes the text of your coach/team name
+	function changeText(element){
+		var yourName = document.getElementById('yourName');
+		var teamName = document.getElementById('teamName');
+
+		var lineupInfo = document.getElementById('lineup').getElementsByTagName('h2')[0];
+		
+		lineupInfo.childNodes[0].nodeValue = coachString(yourName.value, teamName.value);
+	}
+
+	//Called on body onload which checks the localstorage or cookies if IE7, and then loads the background image
+	function loadBG(){
+		if(IElt8){
+			if(GetCookie('IE_BG')){
+			document.body.style.backgroundImage = "url(images/"+GetCookie('IE_BG')+")";
+			}
+		}
+		else if(window.localStorage){
+			if(localStorage.getItem('BG')){
+				
+				//if the localstorage item exists
+				document.body.style.backgroundImage = "url(images/"+localStorage.getItem('BG')+")";
+			}
+			else{
+				document.body.style.backgroundImage = "url(images/court1.jpg)";
+			}
+		}
+		
+	}
+
+	//Changes the Background image and sets the localstorage value of the background image
+	function changeBG(image){
+		if(IElt8){
+			SetCookie('IE_BG', image);
+		}
+		else if(window.localStorage){
+			localStorage.setItem('BG', image);
+		}
+		document.getElementsByTagName('body')[0].style.backgroundImage = "url(images/"+image+")";
+	}
+
+	//The string for your Coach name and Team name
+	function coachString(name, teamName){
+		return "Coach: " + name + " |   Team Name: " + teamName;
+	}
+
+	
+//]]>
+</script>
+</head>
+<body onload="loadBG(); changeSelect(); getDepth(); loadLineup(); ">
+	
+	<div id="mainDiv">
+		<div id="header">
+			
+			<h1>Make your own NBA All Star Team.</h1>
+			
+			
+		</div>
+		<div id="backgrounds">
+				<h2>Change background image</h2>
+				<ul>
+					<li onclick="changeBG('court.jpg');"><img src="images/court.jpg" alt="court 1" height="50"></li>
+					<li onclick="changeBG('court2.jpg');"><img src="images/court2.jpg" alt="court 1" height="50"></li>
+				</ul>
+		</div>
+
+		<div id="wrapper">
+		
+			<div id="selectLabels">
+			<h1>Find a Player to add.</h1>
+			<ul class="addButton">
+				<li onclick="reset();">Reset Selections</li>
+			</ul>
+			<div id="main"></div>
+				
+					
+				
+			
+			</div>
+
+			<div id="infoLabels">
+			<h1>Player Info</h1>
+			<div id="infoButtons">
+				<ul class="addButton">
+				<li onclick="addToLineup();">Add Player to Lineup</li>
+				<li onclick='GoToScroll("lineup");'>View Current Lineup</li>
+				</ul>
+			</div>
+			<div id="info"></div>
+				
+					
+				
+			
+			</div>
+			
+			
+			
+		</div>
+
+		<div id="lineup">
+				<h1>Lineup</h1>
+				<h2 style="color: #85898C">Coach: | Team Name:</h2>
+				<ul class="addButton">
+					<li onclick="deleteLineup();">Reset Entire Lineup</li>
+					<li onclick="loadLineupCookies();">Load saved Lineup</li>
+					<li onclick="GoToScroll('wrapper')">Back to top</li>
+				</ul>
+				<div id="form">
+					<form action="#" method="" onsubmit="return saveLineupCookies();">
+					<ul>
+						<li>Your Name: <input id='yourName' type='text' maxlength="20" onkeyup='changeText(this)'></li>
+						<li>Team Name: <input id='teamName' type='text' maxlength="20" onkeyup='changeText(this)'></li>
+						<li id="submitSave">Save Lineup: <input type="submit" value="Save Lineup"></li>
+					</ul>
+					</form>
+				</div>
+				<div id="playerLineup">
+				</div>
+
+		</div>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<NBA>
+	<Player>
+		<Name>Ray Allen</Name>
+		<Team>Boston Celtics</Team>
+		<Position>Guard</Position>
+		<Number>20</Number>
+		<Height>6-5</Height>
+		<Division>Atlantic</Division>
+	</Player>
+
+	<Player>
+		<Name>Paul Pierce</Name>
+		<Team>Boston Celtics</Team>
+		<Position>Forward</Position>
+		<Number>34</Number>
+		<Height>6-7</Height>
+		<Division>Atlantic</Division>
+	</Player>
+
+	<Player>
+		<Name>Kevin Garnett</Name>
+		<Team>Boston Celtics</Team>
+		<Position>Forward</Position>
+		<Number>5</Number>
+		<Height>6-11</Height>
+		<Division>Atlantic</Division>
+	</Player>
+
+	<Player>
+		<Name>Rajon Rondo</Name>
+		<Team>Boston Celtics</Team>
+		<Position>Guard</Position>
+		<Number>9</Number>
+		<Height>6-1</Height>
+		<Division>Atlantic</Division>
+	</Player>
+
+	<Player>
+		<Name>Carmelo Anthony</Name>
+		<Team>New York Knicks</Team>
+		<Position>Forward</Position>
+		<Number>7</Number>
+		<Height>6-8</Height>
+		<Division>Atlantic</Division>
+	</Player>
+
+	<Player>
+		<Name>Amare Stoudemire</Name>
+		<Team>New York Knicks</Team>
+		<Position>Forward</Position>
+		<Number>1</Number>
+		<Height>6-11</Height>
+		<Division>Atlantic</Division>
+	</Player>
+
+	<Player>
+		<Name>Jeremy Lin</Name>
+		<Team>New York Knicks</Team>
+		<Position>Guard</Position>
+		<Number>17</Number>
+		<Height>6-3</Height>
+		<Division>Atlantic</Division>
+	</Player>
+
+	<Player>
+		<Name>Tyson Chandler</Name>
+		<Team>New York Knicks</Team>
+		<Position>Center</Position>
+		<Number>6</Number>
+		<Height>7-1</Height>
+		<Division>Atlantic</Division>
+	</Player>
+
+	<Player>
+		<Name>Joakim Noah</Name>
+		<Team>Chicago Bulls</Team>
+		<Position>Center</Position>
+		<Number>13</Number>
+		<Height>7-0</Height>
+		<Division>Central</Division>
+	</Player>
+
+	<Player>
+		<Name>Derrick Rose</Name>
+		<Team>Chicago Bulls</Team>
+		<Position>Guard</Position>
+		<Number>1</Number>
+		<Height>6-3</Height>
+		<Division>Central</Division>
+	</Player>
+
+	<Player>
+		<Name>Danny Granger</Name>
+		<Team>Indiana Pacers</Team>
+		<Position>Forward</Position>
+		<Number>33</Number>
+		<Height>6-8</Height>
+		<Division>Central</Division>
+	</Player>
+
+	<Player>
+		<Name>Roy Hibbert</Name>
+		<Team>Indiana Pacers</Team>
+		<Position>Center</Position>
+		<Number>55</Number>
+		<Height>7-2</Height>
+		<Division>Central</Division>
+	</Player>
+
+	<Player>
+		<Name>Brandon Jennings</Name>
+		<Team>Milwaukee Bucks</Team>
+		<Position>Guard</Position>
+		<Number>3</Number>
+		<Height>6-1</Height>
+		<Division>Central</Division>
+	</Player>
+
+	<Player>
+		<Name>Monta Ellis</Name>
+		<Team>Milwaukee Bucks</Team>
+		<Position>Guard</Position>
+		<Number>11</Number>
+		<Height>6-3</Height>
+		<Division>Central</Division>
+	</Player>
+
+	<Player>
+		<Name>Lebron James</Name>
+		<Team>Miami Heat</Team>
+		<Position>Forward/Guard</Position>
+		<Number>6</Number>
+		<Height>6-8</Height>
+		<Division>Southeast</Division>
+	</Player>
+
+	<Player>
+		<Name>Chris Bosh</Name>
+		<Team>Miami Heat</Team>
+		<Position>Forward</Position>
+		<Number>1</Number>
+		<Height>6-11</Height>
+		<Division>Southeast</Division>
+	</Player>
+
+	<Player>
+		<Name>Dwayne Wade</Name>
+		<Team>Miami Heat</Team>
+		<Position>Guard</Position>
+		<Number>3</Number>
+		<Height>6-4</Height>
+		<Division>Southeast</Division>
+	</Player>
+
+	<Player>
+		<Name>Joe Johnson</Name>
+		<Team>Atlanta Hawks</Team>
+		<Position>Guard</Position>
+		<Number>2</Number>
+		<Height>6-7</Height>
+		<Division>Southeast</Division>
+	</Player>
+
+	<Player>
+		<Name>Josh Smith</Name>
+		<Team>Atlanta Hawks</Team>
+		<Position>Forward</Position>
+		<Number>5</Number>
+		<Height>6-9</Height>
+		<Division>Southeast</Division>
+	</Player>
+
+	<Player>
+		<Name>Dwight Howard</Name>
+		<Team>Orlando Magic</Team>
+		<Position>Center</Position>
+		<Number>12</Number>
+		<Height>6-11</Height>
+		<Division>Southeast</Division>
+	</Player>
+
+	<Player>
+		<Name>Kobe Bryant</Name>
+		<Team>Los Angeles Lakers</Team>
+		<Position>Guard</Position>
+		<Number>24</Number>
+		<Height>6-6</Height>
+		<Division>Pacific</Division>
+	</Player>
+
+	<Player>
+		<Name>Andrew Bynum</Name>
+		<Team>Los Angeles Lakers</Team>
+		<Position>Center</Position>
+		<Number>17</Number>
+		<Height>7-0</Height>
+		<Division>Pacific</Division>
+	</Player>
+
+	<Player>
+		<Name>Pau Gasol</Name>
+		<Team>Los Angeles Lakers</Team>
+		<Position>Forward/Center</Position>
+		<Number>16</Number>
+		<Height>7-0</Height>
+		<Division>Pacific</Division>
+	</Player>
+
+	<Player>
+		<Name>Blake Griffin</Name>
+		<Team>Los Angeles Clippers</Team>
+		<Position>Forward</Position>
+		<Number>32</Number>
+		<Height>7-0</Height>
+		<Division>Pacific</Division>
+	</Player>
+
+	<Player>
+		<Name>Chris Paul</Name>
+		<Team>Los Angeles Clippers</Team>
+		<Position>Guard</Position>
+		<Number>3</Number>
+		<Height>6-0</Height>
+		<Division>Pacific</Division>
+	</Player>
+
+
+	<Player>
+		<Name>Steve Nash</Name>
+		<Team>Pheonix Suns</Team>
+		<Position>Guard</Position>
+		<Number>13</Number>
+		<Height>6-3</Height>
+		<Division>Pacific</Division>
+	</Player>
+
+	<Player>
+		<Name>Kevin Durant</Name>
+		<Team>Oklahoma City Thunder</Team>
+		<Position>Forward/Guard</Position>
+		<Number>35</Number>
+		<Height>6-8</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>James Harden</Name>
+		<Team>Oklahoma City Thunder</Team>
+		<Position>Guard</Position>
+		<Number>13</Number>
+		<Height>6-5</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Russell Westbrook</Name>
+		<Team>Oklahoma City Thunder</Team>
+		<Position>Guard</Position>
+		<Number>0</Number>
+		<Height>6-3</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Ty Lawson</Name>
+		<Team>Denver Nuggets</Team>
+		<Position>Guard</Position>
+		<Number>3</Number>
+		<Height>5-11</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Danilo Gallinari</Name>
+		<Team>Denver Nuggets</Team>
+		<Position>Forward</Position>
+		<Number>8</Number>
+		<Height>6-10</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Kevin Love</Name>
+		<Team>Minnesota Timberwolves</Team>
+		<Position>Forward/Center</Position>
+		<Number>42</Number>
+		<Height>6-10</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Lamarcus Aldridge</Name>
+		<Team>Portland Trailblazers</Team>
+		<Position>Forward</Position>
+		<Number>12</Number>
+		<Height>6-11</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Paul Millsap</Name>
+		<Team>Utah Jazz</Team>
+		<Position>Forward</Position>
+		<Number>24</Number>
+		<Height>6-8</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Al Jefferson</Name>
+		<Team>Utah Jazz</Team>
+		<Position>Center</Position>
+		<Number>25</Number>
+		<Height>6-10</Height>
+		<Division>Northwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Tim Duncan</Name>
+		<Team>San Antonio Spurs</Team>
+		<Position>Forward</Position>
+		<Number>21</Number>
+		<Height>6-11</Height>
+		<Division>Southwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Tony Parker</Name>
+		<Team>San Antonio Spurs</Team>
+		<Position>Guard</Position>
+		<Number>9</Number>
+		<Height>6-2</Height>
+		<Division>Southwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Kevin Martin</Name>
+		<Team>Houston Rockets</Team>
+		<Position>Forward</Position>
+		<Number>12</Number>
+		<Height>6-7</Height>
+		<Division>Southwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Dirk Nowitzki</Name>
+		<Team>Dallas Mavericks</Team>
+		<Position>Guard</Position>
+		<Number>1</Number>
+		<Height>6-4</Height>
+		<Division>Southwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Marc Gasol</Name>
+		<Team>Memphis Grizzlies</Team>
+		<Position>Center</Position>
+		<Number>33</Number>
+		<Height>7-1</Height>
+		<Division>Southwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Rudy Gay</Name>
+		<Team>Memphis Grizzlies</Team>
+		<Position>Forward/Guard</Position>
+		<Number>22</Number>
+		<Height>6-8</Height>
+		<Division>Southwest</Division>
+	</Player>
+
+	<Player>
+		<Name>Zach Randolph</Name>
+		<Team>Memphis Grizzlies</Team>
+		<Position>Forward</Position>
+		<Number>50</Number>
+		<Height>6-9</Height>
+		<Division>Southwest</Division>
+	</Player>
+</NBA>
