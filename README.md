@@ -26,12 +26,12 @@ Live Demo: http://tshamsul.com/projects/NBATeam/
     ...
     ...
     <Player>
-		  <Name>Carmelo Anthony</Name>
-		  <Team>New York Knicks</Team>
-		  <Position>Forward</Position>
-		  <Number>7</Number>
-		  <Height>6-8</Height>
-		  <Division>Atlantic</Division>
-	  </Player>
+      <Name>Carmelo Anthony</Name>
+      <Team>New York Knicks</Team>
+      <Position>Forward</Position>
+      <Number>7</Number>
+      <Height>6-8</Height>
+      <Division>Atlantic</Division>
+    </Player>
   </NBA>
 ```
