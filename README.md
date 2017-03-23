@@ -2,6 +2,8 @@ NBATeamSelector
 ===============
 
 Javascript NBA Team selector project
+Live Demo: http://tshamsul.com/projects/NBATeam/
+
 
 
 - This website is written in pure javascript to dynamically create elements, animations etc. to select players and create an imaginary NBA All-Star team. 
@@ -30,8 +32,5 @@ Javascript NBA Team selector project
       <Height>6-11</Height>
       <Division>Atlantic</Division>
     </Player>
+</NBA>
 ```
-
-Live Demo: http://tshamsul.com/projects/NBATeam/
-
-
