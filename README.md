@@ -13,7 +13,8 @@ Live Demo: http://tshamsul.com/projects/NBATeam/
 - Website needs to run on a server for ajax calls to function properly or else data from playerData.XML will not show
 - XML player data was created manually to mock a simple API. (Roster accurate as of 2011-2012 NBA season)
   
-  ```<NBA>
+```xml
+  <NBA>
     <Player>
       <Name>Ray Allen</Name>
       <Team>Boston Celtics</Team>
